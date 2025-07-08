@@ -11,3 +11,6 @@ Validador de error de usuario ->
 Loading al momento de iniciar sesión y ver los datos cargados -> Hecho
 
 Gaaaaa
+
+
+asdasdsad
