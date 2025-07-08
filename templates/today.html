@@ -1,0 +1,204 @@
+{% extends "base.html" %}
+{% block title %} Hoy  {%endblock%}
+{% block content %}
+
+<!--//Orders-->
+<div class="app-wrapper">
+	<div class="app-content pt-3 p-md-3 p-lg-4">
+		<div class="container-xl">
+			<div class="row g-3 mb-4 align-items-center justify-content-between">
+				<div class="col-auto">
+					<h1 class="app-page-title mb-0">Marcaciones de hoy</h1>
+				</div>
+				<div class="col-auto">
+					<div class="page-utilities">
+						<div class="row g-2 justify-content-start justify-content-md-end align-items-center">
+							<div class="col-auto">
+								<form class="table-search-form row gx-1 align-items-center form-busqueda">
+									<div class="col-auto">
+										<input type="text" id="search-orders" name="searchorders"
+											class="form-control search-orders" placeholder="Buscar...">
+									</div>
+								</form>
+							</div><!--//col-->
+							<div class="col-auto">
+								<a class="btn app-btn-secondary" href="{{url_for('endpoint_reports.descargar_reporte_asistencia_diaria')}}">
+									<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-download me-1"
+										fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+										<path fill-rule="evenodd"
+											d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+										<path fill-rule="evenodd"
+											d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+									</svg>
+									Descargar lista
+								</a>
+							</div>
+						</div><!--//row-->
+					</div><!--//table-utilities-->
+				</div><!--//col-auto-->
+			</div><!--//row-->
+			<nav id="orders-table-tab" class="orders-table-tab app-nav-tabs nav shadow-sm flex-column flex-sm-row mb-4">
+				<a class="flex-sm-fill text-sm-center nav-link active" id="orders-all-tab" data-bs-toggle="tab"
+					href="#orders-all" role="tab" aria-controls="orders-all" aria-selected="true">Hoy</a>				
+			</nav>
+
+			<div class="tab-content" id="orders-table-tab-content">
+				<div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
+					<div class="app-card app-card-orders-table shadow-sm mb-5">
+						<div class="app-card-body">
+							<div class="table-responsive">
+								<table class="table app-table-hover mb-0 text-left">
+									<thead>
+										<tr>
+											<th class="cell">Id</th>
+											<th class="cell">Nombre</th>
+											<th class="cell">Area</th>
+											<th class="cell">Fecha</th>
+											<th class="cell">Hora</th>
+											<th class="cell">Estado</th>											
+											<th class="cell"></th>
+										</tr>
+									</thead>
+									<tbody id="biometrico-tbody">
+										<!-- Se llenará con JavaScript -->
+									</tbody>
+								</table>
+
+							</div><!--//table-responsive-->
+							<div id="loader-container" class="text-center my-4">
+								<div class="loader"></div>
+							</div>
+
+						</div><!--//app-card-body-->
+					</div><!--//app-card-->
+					<nav class="app-pagination">
+						<ul class="pagination justify-content-center">
+							<li class="page-item disabled">
+								<a class="page-link" href="#" tabindex="-1" aria-disabled="true">anterior</a>
+							</li>
+							<li class="page-item active"><a class="page-link" href="#">1</a></li>
+							<li class="page-item"><a class="page-link" href="#">2</a></li>
+							<li class="page-item"><a class="page-link" href="#">3</a></li>
+							<li class="page-item">
+								<a class="page-link" href="#">Siguiente</a>
+							</li>
+						</ul>
+					</nav><!--//app-pagination-->
+				</div><!--//tab-pane-->
+			</div><!--//tab-content-->
+		</div><!--//container-fluid-->
+	</div><!--//app-content-->
+</div><!--//app-wrapper-->
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+	let usuarios = [];
+	let currentPage = 1;
+	const rowsPerPage = 20;
+
+	let tbody, pagination;
+
+	function renderTable(data = usuarios) {
+		tbody.innerHTML = "";
+		const start = (currentPage - 1) * rowsPerPage;
+		const pageData = data.slice(start, start + rowsPerPage);
+
+		pageData.forEach(row => {
+			const [dia, mes, anio, hora, ampm] = row.fecha.split(" ");
+			const tr = document.createElement('tr');
+			tr.innerHTML = `
+				<td class="cell">#${row.user_id}</td>
+				<td class="cell">${row.nombre}</td>
+				<td class="cell">N/A</td>
+				<td class="cell"><span>${dia} ${mes} ${anio}</span></td>
+				<td class="cell"><span class="note">${hora} ${ampm}</span></td>
+				<td class="cell"><span class="badge bg-info">${row.estado}</span></td>							
+			`;
+			tbody.appendChild(tr);
+		});
+	}
+
+	function renderPagination(data = usuarios) {
+		pagination.innerHTML = "";
+		const totalPages = Math.ceil(data.length / rowsPerPage);
+		if (totalPages <= 1) return;
+
+		const prev = document.createElement('li');
+		prev.className = `page-item ${currentPage === 1 ? 'disabled' : ''}`;
+		prev.innerHTML = `<a class="page-link" href="#">Anterior</a>`;
+		prev.addEventListener("click", e => {
+			e.preventDefault();
+			if (currentPage > 1) {
+				currentPage--;
+				renderTable(data);
+				renderPagination(data);
+			}
+		});
+		pagination.appendChild(prev);
+
+		for (let i = 1; i <= totalPages; i++) {
+			const li = document.createElement('li');
+			li.className = `page-item ${currentPage === i ? 'active' : ''}`;
+			li.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+			li.addEventListener("click", e => {
+				e.preventDefault();
+				currentPage = i;
+				renderTable(data);
+				renderPagination(data);
+			});
+			pagination.appendChild(li);
+		}
+
+		const next = document.createElement('li');
+		next.className = `page-item ${currentPage === totalPages ? 'disabled' : ''}`;
+		next.innerHTML = `<a class="page-link" href="#">Siguiente</a>`;
+		next.addEventListener("click", e => {
+			e.preventDefault();
+			if (currentPage < totalPages) {
+				currentPage++;
+				renderTable(data);
+				renderPagination(data);
+			}
+		});
+		pagination.appendChild(next);
+	}
+
+	document.addEventListener("DOMContentLoaded", () => {
+		const loader = document.getElementById('loader-container');
+		tbody = document.getElementById('biometrico-tbody');
+		pagination = document.getElementById('pagination');
+
+		fetch('/api/asistencia_hoy')
+			.then(res => res.json())
+			.then(data => {
+				if (data.error) {
+					loader.innerText = "Error: " + data.error;
+					return;
+				}
+
+				usuarios = data.registros;
+				loader.style.display = 'none';
+				renderTable();
+				renderPagination();
+			})
+			.catch(err => {
+				loader.innerText = "Error al cargar datos.";
+				console.error(err);
+			});
+
+		const searchInput = document.getElementById("search-orders");
+		searchInput.addEventListener("input", function () {
+			const query = searchInput.value.trim().toLowerCase();
+			const resultados = usuarios.filter(u =>
+				u.nombre.toLowerCase().includes(query) ||
+				u.user_id.toString().includes(query)
+			);
+			currentPage = 1;
+			renderTable(resultados);
+			renderPagination(resultados);
+		});
+	});
+</script>
+{% endblock %}

@@ -1,0 +1,507 @@
+{% extends "base.html" %}
+{% block title %} Lista de usuarios {%endblock%}
+{% block content %}
+
+<!--//Orders-->
+
+<div class="app-wrapper">
+	<div class="app-content pt-3 p-md-3 p-lg-4">
+		<div class="container-xl">
+			<div class="row g-3 mb-4 align-items-center justify-content-between">
+				<div class="col-auto">
+					<h1 class="app-page-title mb-0">Gestion de usuarios</h1>
+				</div>
+				<div class="col-auto">
+					<div class="page-utilities">
+						<div class="row g-2 justify-content-start justify-content-md-end align-items-center">
+							<div class="col-auto">
+								<form class="table-search-form row gx-1 align-items-center form-busqueda">
+									<div class="col-auto">
+										<input type="text" id="search-orders" name="searchorders"
+											class="form-control search-orders" placeholder="Buscar">
+									</div>
+								</form>
+							</div><!--//col-->
+							<div class="col-auto">
+								<a class="btn app-btn-secondary"
+									href="{{url_for('endpoint_reports.descargar_reporte_usuarios')}}">
+									<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-download me-1"
+										fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+										<path fill-rule="evenodd"
+											d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+										<path fill-rule="evenodd"
+											d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+									</svg>
+									Descargar lista
+								</a>
+							</div>
+						</div><!--//row-->
+					</div><!--//table-utilities-->
+				</div><!--//col-auto-->
+			</div><!--//row-->
+			<nav id="orders-table-tab" class="orders-table-tab app-nav-tabs nav shadow-sm flex-column flex-sm-row mb-4">
+				<a class="flex-sm-fill text-sm-center nav-link active" id="orders-all-tab" data-bs-toggle="tab"
+					href="#orders-all" role="tab" aria-controls="orders-all" aria-selected="true">Todos</a>
+			</nav>
+
+			<div class="tab-content" id="orders-table-tab-content">
+				<div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
+					<div class="app-card app-card-orders-table shadow-sm mb-5">
+						<div class="app-card-body">
+							<div class="table-responsive">
+								<table class="table app-table-hover mb-0 text-left">
+									<thead>
+										<tr>
+											<th class="cell">DNI</th>
+											<th class="cell">Nombre</th>
+											<th class="cell">Area</th>
+											<th class="cell">Privilegio</th>
+											<th class="cell">Estado</th>
+											<th class="cell">Opciones</th>
+											<th class="cell"></th>
+										</tr>
+									</thead>
+									<tbody id="biometrico-tbody">
+										<!-- Se llenará con JavaScript -->
+									</tbody>
+								</table>
+
+							</div><!--//table-responsive-->
+							<div id="loader-container" class="text-center my-4">
+								<div class="loader"></div>
+							</div>
+						</div><!--//app-card-body-->
+					</div><!--//app-card-->
+					<nav class="app-pagination">
+						<ul class="pagination justify-content-center" id="pagination">
+							<!-- aquí insertamos dinámicamente -->
+						</ul>
+					</nav><!--//app-pagination-->
+				</div><!--//tab-pane-->
+			</div><!--//tab-content-->
+		</div><!--//container-fluid-->
+	</div><!--//app-content-->
+</div><!--//app-wrapper-->
+<div class="modal fade" id="modalUsuario" tabindex="-1" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Editar Usuario</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+			</div>
+			<div class="modal-body">
+				<form id="formUsuario">
+					<input type="hidden" id="modal-user-id">
+					<div class="mb-3">
+						<label class="form-label">Nombre</label>
+						<input type="text" class="form-control" id="modal-nombre">
+					</div>
+					<div class="mb-3">
+						<label class="form-label">Area</label>
+						<select class="form-select" id="modal-grupo">
+							<option selected>Seleccionar</option>
+						</select>
+					</div>
+					<div class="mb-3">
+						<label class="form-label">Privilegio</label>
+						<select class="form-select" id="modal-privilegio">
+							<option value="1">Administrador</option>
+							<option value="2">Usuario</option>
+						</select>
+					</div>
+					<div class="mb-3">
+						<label class="form-label">Estado</label>
+						<select class="form-select" id="modal-estado">
+							<option value="1">Habilitado</option>
+							<option value="2">Inhabilitado</option>
+						</select>
+					</div>
+					<div class="mb-3">
+						<label class="form-label">Empresa</label>
+						<select class="form-select" id="modal-company">
+							<option selected>Seleccionar</option>
+						</select>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+				<button class="btn btn-primary" id="btnGuardarUsuario">Guardar cambios</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
+{% block scripts %}
+<script>
+	// Variables globales
+	let usuarios = [];
+	let companies = [];
+	let area = [];
+	let currentPage = 1;
+	const rowsPerPage = 20;
+
+	let tbody, pagination;
+
+	function renderTableArea(data_3 = area) {
+		console.log(data_3);
+		const select = document.getElementById('modal-grupo');
+
+		// Limpia el SELECT excepto la opción "Seleccionar"
+		select.innerHTML = '<option selected>Seleccionar</option>';
+
+		const start = (currentPage - 1) * rowsPerPage;
+		const pageData_3 = data_3.slice(start, start + rowsPerPage);
+
+		pageData_3.forEach(row => {
+			const option = document.createElement('option');
+			option.value = row.id;
+			option.textContent = row.area_name;
+			select.appendChild(option);
+		});
+	}
+
+	function renderTableCompanies(data_2 = companies) {
+		console.log(data_2);
+		const select = document.getElementById('modal-company');
+
+		// Limpia el SELECT excepto la opción "Seleccionar"
+		select.innerHTML = '<option selected>Seleccionar</option>';
+
+		const start = (currentPage - 1) * rowsPerPage;
+		const pageData_2 = data_2.slice(start, start + rowsPerPage);
+
+		pageData_2.forEach(row => {
+			const option = document.createElement('option');
+			option.value = row.id;
+			option.textContent = row.name_company;
+			select.appendChild(option);
+		});
+	}
+
+	// Función para renderizar tabla
+	function renderTable(data = usuarios) {
+
+		tbody.innerHTML = "";
+		const start = (currentPage - 1) * rowsPerPage;
+		const pageData = data.slice(start, start + rowsPerPage);
+
+		pageData.forEach(row => {
+			const tr = document.createElement('tr');
+			tr.setAttribute("data-user-id", row.dni); // O usa row.id si tienes id PK
+
+			tr.innerHTML = `
+			<td class="cell">${row.dni}</td>
+			<td class="cell">${row.nombre}</td>
+			<td class="cell">${row.area_nombre}</td>
+			<td class="cell">${row.privilegio_nombre}</td>	
+			<td class="cell">${row.estado_nombre}</td>					
+			<td class="cell">
+				<button class="btn btn-sm btn-info btn-ver"
+					data-dni="${row.dni}"
+					data-nombre="${row.nombre}"
+					data-area="${row.area_id}"
+					data-privilegio="${row.privilegio_id}"
+					data-estado="${row.estado_id}"
+					data-company="${row.company_id}">
+					Ver
+				</button>
+				<button class="btn btn-danger btn-sm eliminar-usuario" 
+					data-user-id="${row.dni}">
+					Eliminar
+				</button>
+			</td>
+		`;
+			tbody.appendChild(tr);
+		});
+	}
+
+
+	// Función para renderizar la paginación
+	function renderPagination(data = usuarios) {
+		pagination.innerHTML = '';
+		const totalPages = Math.ceil(usuarios.length / rowsPerPage);
+		const maxVisible = 5;
+
+		const pages = [];
+
+		for (let i = 1; i <= totalPages; i++) {
+			if (i === 1 || i === totalPages || (i >= currentPage - 2 && i <= currentPage + 2)) {
+				pages.push(i);
+			} else if (i === currentPage - 3 || i === currentPage + 3) {
+				pages.push('...');
+			}
+		}
+
+		const finalPages = pages.filter((v, i, a) => v === '...' ? a[i - 1] !== '...' : true);
+
+		const prev = document.createElement('li');
+		prev.className = `page-item ${currentPage === 1 ? 'disabled' : ''}`;
+		prev.innerHTML = `<a class="page-link" href="#">Previous</a>`;
+		prev.addEventListener('click', e => {
+			e.preventDefault();
+			if (currentPage > 1) {
+				currentPage--;
+				renderTable(data);
+				renderPagination(data);
+			}
+		});
+		pagination.appendChild(prev);
+
+		finalPages.forEach(p => {
+			const li = document.createElement('li');
+			if (p === '...') {
+				li.className = 'page-item disabled';
+				li.innerHTML = `<span class="page-link">...</span>`;
+			} else {
+				li.className = `page-item ${p === currentPage ? 'active' : ''}`;
+				li.innerHTML = `<a class="page-link" href="#">${p}</a>`;
+				li.addEventListener('click', e => {
+					e.preventDefault();
+					currentPage = p;
+					renderTable(data);
+					renderPagination(data);
+				});
+			}
+			pagination.appendChild(li);
+		});
+
+		const next = document.createElement('li');
+		next.className = `page-item ${currentPage === totalPages ? 'disabled' : ''}`;
+		next.innerHTML = `<a class="page-link" href="#">Next</a>`;
+		next.addEventListener('click', e => {
+			e.preventDefault();
+			if (currentPage < totalPages) {
+				currentPage++;
+				renderTable(data);
+				renderPagination(data);
+			}
+		});
+		pagination.appendChild(next);
+	}
+
+	// DOMContentLoaded: inicialización
+	document.addEventListener("DOMContentLoaded", () => {
+		const loader = document.getElementById('loader-container');
+		tbody = document.getElementById('biometrico-tbody');
+		tbody_companies = document.getElementById('biometrico-companies');
+		pagination = document.getElementById('pagination');
+
+		// Obtener usuarios del backend
+		fetch('/api/lista_usuarios')
+			.then(res => res.json())
+			.then(data => {
+				if (data.error) {
+					loader.innerText = "Error: " + data.error;
+					return;
+				}
+				usuarios = data.usuarios;
+				loader.style.display = 'none';
+				renderTable();
+				renderPagination();
+			})
+			.catch(err => {
+				loader.innerText = "Error al cargar datos.";
+				console.error(err);
+			});
+
+		fetch('/api/lista_area')
+			.then(res => res.json())
+			.then(data => {
+				if (data.error) {
+					loader.innerText = "Error: " + data.error;
+					return;
+				}
+				area = data.area;
+				loader.style.display = 'none';
+				renderTableArea();
+				renderPagination();
+			})
+			.catch(err => {
+				loader.innerText = "Error al cargar datos.";
+				console.error(err);
+			});
+
+		fetch('/api/lista_companies')
+			.then(res => res.json())
+			.then(data => {
+				if (data.error) {
+					loader.innerText = "Error: " + data.error;
+					return;
+				}
+				companies = data.companies;
+				loader.style.display = 'none';
+				renderTableCompanies();
+				renderPagination();
+			})
+			.catch(err => {
+				loader.innerText = "Error al cargar datos.";
+				console.error(err);
+			});
+
+
+		// Delegación para buscar
+		const form = document.getElementById("form-busqueda");
+		const searchInput = document.getElementById("search-orders");
+		searchInput.addEventListener("input", function () {
+
+			const query = searchInput.value.trim().toLowerCase();
+			const resultados = usuarios.filter(u =>
+				u.nombre.toLowerCase().includes(query) ||
+				u.dni.toString().includes(query)
+			);
+
+			currentPage = 1; // Reinicia a la primera página
+			renderTable(resultados);
+			renderPagination(resultados);
+		});
+
+		// Delegación para botón Eliminar
+		tbody.addEventListener("click", e => {
+			if (e.target.classList.contains("eliminar-usuario")) {
+				const userId = e.target.dataset.userId;
+
+				// Confirmación con SweetAlert2
+				Swal.fire({
+					title: '¿Estás seguro?',
+					text: "Esta acción no se puede deshacer.",
+					icon: 'warning',
+					showCancelButton: true,
+					confirmButtonColor: '#d33',
+					cancelButtonColor: '#3085d6',
+					confirmButtonText: 'Sí, eliminar',
+					cancelButtonText: 'Cancelar'
+				}).then((result) => {
+					if (result.isConfirmed) {
+						// Si el usuario confirma, se procede a eliminar
+						fetch(`/eliminar_usuario/${userId}`, { method: 'DELETE' })
+							.then(async response => {
+								if (!response.ok) {
+									const contentType = response.headers.get('Content-Type');
+									if (contentType && contentType.includes('application/json')) {
+										const errorData = await response.json();
+										throw new Error(errorData.mensaje || "Error inesperado");
+									} else {
+										const text = await response.text();
+										console.error("Respuesta inesperada del servidor:", text);
+										throw new Error("Error inesperado del servidor.");
+									}
+								}
+								return response.json();
+							})
+							.then(data => {
+								usuarios = usuarios.filter(u => u.user_id != userId);
+								renderTable();
+								renderPagination();
+								Swal.fire({
+									title: 'Eliminado',
+									text: data.mensaje || "El usuario ha sido eliminado.",
+									icon: 'success',
+									timer: 2000,
+									showConfirmButton: false
+								});
+							})
+							.catch(error => {
+								console.error("Error al eliminar el usuario:", error);
+								Swal.fire({
+									title: 'Error',
+									text: error.message || "Ocurrió un error al eliminar el usuario.",
+									icon: 'error',
+									confirmButtonText: 'Cerrar'
+								});
+							});
+					}
+				});
+			}
+		});
+
+		// Delegación para botón Ver (modal)
+		tbody.addEventListener("click", e => {
+			if (e.target.classList.contains("btn-ver")) {
+				const btn = e.target;
+				console.log("btn.dataset.area:", btn.dataset.area);
+				console.log("btn.dataset.privilegio:", btn.dataset.privilegio);
+				console.log("btn.dataset.estado:", btn.dataset.estado);
+				console.log("btn.dataset.company:", btn.dataset.company);
+
+				document.getElementById("modal-user-id").value = btn.dataset.dni;
+				document.getElementById("modal-nombre").value = btn.dataset.nombre;
+				document.getElementById("modal-grupo").value = btn.dataset.area;
+				document.getElementById("modal-privilegio").value = btn.dataset.privilegio;
+				document.getElementById("modal-estado").value = btn.dataset.estado;
+				document.getElementById("modal-company").value = btn.dataset.company;
+				new bootstrap.Modal(document.getElementById('modalUsuario')).show();
+			}
+		});
+	});
+
+	// Guardar cambios desde el modal
+	document.getElementById("btnGuardarUsuario").addEventListener("click", () => {
+		const payload = {
+			dni: document.getElementById("modal-user-id").value,
+			nombre: document.getElementById("modal-nombre").value,
+			grupo: document.getElementById("modal-grupo").value,
+			privilegio: document.getElementById("modal-privilegio").value,
+			estado: document.getElementById("modal-estado").value,
+			company: document.getElementById("modal-company").value
+		};
+
+		console.log("Payload que se enviará:", payload);  // 👈 AQUI
+
+		fetch('/api/actualizar_usuario', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({
+				dni: payload.dni, // O usa "dni" si tu endpoint ya lo tiene así
+				nombre: payload.nombre,
+				grupo: payload.grupo,
+				privilegio: payload.privilegio,
+				estado: payload.estado,
+				company: payload.company
+			})
+		})
+			.then(res => res.json())
+			.then(data => {
+				if (data.error) {
+					Swal.fire({
+						icon: 'error',
+						title: 'Error',
+						text: data.error
+					});
+				} else {
+					Swal.fire({
+						icon: 'success',
+						title: 'Usuario actualizado',
+						text: 'Cambios guardados correctamente.',
+						timer: 2000,
+						showConfirmButton: false
+					});
+
+					// Re-cargar lista desde la base de datos:
+					fetch('/api/lista_usuarios')
+						.then(res => res.json())
+						.then(data => {
+							usuarios = data.usuarios;
+							renderTable();
+							renderPagination();
+						})
+						.catch(err => console.error("Error al recargar usuarios:", err));
+
+					const modal = bootstrap.Modal.getInstance(document.getElementById('modalUsuario'));
+					modal.hide();
+				}
+			})
+			.catch(err => {
+				console.error(err);
+				Swal.fire({
+					icon: 'error',
+					title: 'Error de red',
+					text: 'Ocurrió un error al actualizar.'
+				});
+			});
+	});
+
+</script>
+
+{% endblock %}

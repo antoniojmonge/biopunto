@@ -1,0 +1,203 @@
+{% extends "base.html" %}
+{% block title %} Mi Empresa {%endblock%}
+{% block content %}
+
+<div class="app-wrapper">
+	<div class="app-content pt-3 p-md-3 p-lg-4">
+		<div class="container-xl">
+			<h1 class="app-page-title">Dispositivo Conectado</h1>
+			<div class="row gy-4">
+				<div class="col-12 col-lg-6">
+					<div class="app-card app-card-account shadow-sm d-flex flex-column align-items-start">
+						<div class="app-card-header p-3 border-bottom-0">
+							<div class="row align-items-center gx-3">
+								<div class="col-auto">
+									<div class="app-icon-holder">
+										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+											fill="currentColor" class="bi bi-fingerprint" viewBox="0 0 16 16">
+											<path
+												d="M8.06 6.5a.5.5 0 0 1 .5.5v.776a11.5 11.5 0 0 1-.552 3.519l-1.331 4.14a.5.5 0 0 1-.952-.305l1.33-4.141a10.5 10.5 0 0 0 .504-3.213V7a.5.5 0 0 1 .5-.5Z" />
+											<path
+												d="M6.06 7a2 2 0 1 1 4 0 .5.5 0 1 1-1 0 1 1 0 1 0-2 0v.332q0 .613-.066 1.221A.5.5 0 0 1 6 8.447q.06-.555.06-1.115zm3.509 1a.5.5 0 0 1 .487.513 11.5 11.5 0 0 1-.587 3.339l-1.266 3.8a.5.5 0 0 1-.949-.317l1.267-3.8a10.5 10.5 0 0 0 .535-3.048A.5.5 0 0 1 9.569 8m-3.356 2.115a.5.5 0 0 1 .33.626L5.24 14.939a.5.5 0 1 1-.955-.296l1.303-4.199a.5.5 0 0 1 .625-.329" />
+											<path
+												d="M4.759 5.833A3.501 3.501 0 0 1 11.559 7a.5.5 0 0 1-1 0 2.5 2.5 0 0 0-4.857-.833.5.5 0 1 1-.943-.334m.3 1.67a.5.5 0 0 1 .449.546 10.7 10.7 0 0 1-.4 2.031l-1.222 4.072a.5.5 0 1 1-.958-.287L4.15 9.793a9.7 9.7 0 0 0 .363-1.842.5.5 0 0 1 .546-.449Zm6 .647a.5.5 0 0 1 .5.5c0 1.28-.213 2.552-.632 3.762l-1.09 3.145a.5.5 0 0 1-.944-.327l1.089-3.145c.382-1.105.578-2.266.578-3.435a.5.5 0 0 1 .5-.5Z" />
+											<path
+												d="M3.902 4.222a5 5 0 0 1 5.202-2.113.5.5 0 0 1-.208.979 4 4 0 0 0-4.163 1.69.5.5 0 0 1-.831-.556m6.72-.955a.5.5 0 0 1 .705-.052A4.99 4.99 0 0 1 13.059 7v1.5a.5.5 0 1 1-1 0V7a3.99 3.99 0 0 0-1.386-3.028.5.5 0 0 1-.051-.705M3.68 5.842a.5.5 0 0 1 .422.568q-.044.289-.044.59c0 .71-.1 1.417-.298 2.1l-1.14 3.923a.5.5 0 1 1-.96-.279L2.8 8.821A6.5 6.5 0 0 0 3.058 7q0-.375.054-.736a.5.5 0 0 1 .568-.422m8.882 3.66a.5.5 0 0 1 .456.54c-.084 1-.298 1.986-.64 2.934l-.744 2.068a.5.5 0 0 1-.941-.338l.745-2.07a10.5 10.5 0 0 0 .584-2.678.5.5 0 0 1 .54-.456" />
+											<path
+												d="M4.81 1.37A6.5 6.5 0 0 1 14.56 7a.5.5 0 1 1-1 0 5.5 5.5 0 0 0-8.25-4.765.5.5 0 0 1-.5-.865m-.89 1.257a.5.5 0 0 1 .04.706A5.48 5.48 0 0 0 2.56 7a.5.5 0 0 1-1 0c0-1.664.626-3.184 1.655-4.333a.5.5 0 0 1 .706-.04ZM1.915 8.02a.5.5 0 0 1 .346.616l-.779 2.767a.5.5 0 1 1-.962-.27l.778-2.767a.5.5 0 0 1 .617-.346m12.15.481a.5.5 0 0 1 .49.51c-.03 1.499-.161 3.025-.727 4.533l-.07.187a.5.5 0 0 1-.936-.351l.07-.187c.506-1.35.634-2.74.663-4.202a.5.5 0 0 1 .51-.49" />
+										</svg>
+									</div><!--//icon-holder-->
+								</div><!--//col-->
+								<div class="col-auto">
+									<h4 class="app-card-title">Información del equipo</h4>
+								</div><!--//col-->
+							</div><!--//row-->
+						</div><!--//app-card-header-->
+						<div class="app-card-body px-4 w-100">
+							<div class="item border-bottom py-3">
+								<div class="row justify-content-between align-items-center">
+									<div class="col-auto">
+										<div class="item-data"><img class="profile-image"
+												src="{{url_for('static', filename=('img/icono_biometrico.png'))}}"
+												alt="">
+										</div>
+									</div><!--//col-->
+								</div><!--//row-->
+							</div><!--//item-->
+							<div class="item border-bottom py-3">
+								<div class="row justify-content-between align-items-center">
+									<div class="col-auto">
+										<div class="item-label"><strong>Nombre del equipo</strong></div>
+										<div class="item-data" id="device-name"></div>
+									</div><!--//col-->
+								</div><!--//row-->
+							</div><!--//item-->
+							<div class="item border-bottom py-3">
+								<div class="row justify-content-between align-items-center">
+									<div class="col-auto">
+										<div class="item-label"><strong>Número de serie</strong></div>
+										<div class="item-data" id="device-serie">
+										</div>
+									</div><!--//col-->
+								</div><!--//row-->
+							</div><!--//item-->
+							<div class="item border-bottom py-3">
+								<div class="row justify-content-between align-items-center">
+									<div class="col-auto">
+										<div class="item-label"><strong>Versión de Firmware</strong></div>
+										<div class="item-data" id="device-firmware">
+										</div>
+									</div><!--//col-->
+								</div><!--//row-->
+							</div><!--//item-->
+							<div class="item border-bottom py-3">
+								<div class="row justify-content-between align-items-center">
+									<div class="col-auto">
+										<div class="item-label"><strong>IP</strong></div>
+										<div class="item-data" id="device-ip">
+										</div>
+									</div><!--//col-->
+								</div><!--//row-->
+							</div><!--//item-->
+							<div class="item border-bottom py-3">
+								<div class="row justify-content-between align-items-center">
+									<div class="col-auto">
+										<div class="item-label"><strong>Puerto</strong></div>
+										<div class="item-data" id="device-port">
+										</div>
+									</div><!--//col-->
+								</div><!--//row-->
+							</div><!--//item-->
+							<div class="item border-bottom py-3">
+								<div class="row justify-content-between align-items-center">
+									<div class="col-auto">
+										<div class="item-label"><strong>Timeout</strong></div>
+										<div class="item-data" id="device-timeout">
+										</div>
+									</div><!--//col-->
+								</div><!--//row-->
+							</div><!--//item-->
+							<div class="item border-bottom py-3">
+								<div class="row justify-content-between align-items-center">
+									<div class="col-auto">
+										<div class="item-label"><strong>Clave de pc</strong></div>
+										<div class="item-data" id="device-password">
+										</div>
+									</div><!--//col-->
+								</div><!--//row-->
+							</div><!--//item-->
+
+						</div><!--//app-card-body-->
+						<div class="app-card-footer p-4 mt-auto">
+							<a class="btn app-btn-secondary" data-bs-toggle="modal"
+								data-bs-target="#modalInfoDevice">Administrar Dispositivo</a>
+						</div><!--//app-card-footer-->
+					</div><!--//app-card-->
+				</div><!--//col-->
+				<div class="col-12 col-lg-6">
+					<div class="app-card app-card-account shadow-sm d-flex flex-column align-items-start">
+						<div class="app-card-header p-3 border-bottom-0">
+							<div class="row align-items-center gx-3">
+								<div class="col-auto">
+									<div class="app-icon-holder">
+										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+											fill="currentColor" class="bi bi-database" viewBox="0 0 16 16">
+											<path
+												d="M4.318 2.687C5.234 2.271 6.536 2 8 2s2.766.27 3.682.687C12.644 3.125 13 3.627 13 4c0 .374-.356.875-1.318 1.313C10.766 5.729 9.464 6 8 6s-2.766-.27-3.682-.687C3.356 4.875 3 4.373 3 4c0-.374.356-.875 1.318-1.313M13 5.698V7c0 .374-.356.875-1.318 1.313C10.766 8.729 9.464 9 8 9s-2.766-.27-3.682-.687C3.356 7.875 3 7.373 3 7V5.698c.271.202.58.378.904.525C4.978 6.711 6.427 7 8 7s3.022-.289 4.096-.777A5 5 0 0 0 13 5.698M14 4c0-1.007-.875-1.755-1.904-2.223C11.022 1.289 9.573 1 8 1s-3.022.289-4.096.777C2.875 2.245 2 2.993 2 4v9c0 1.007.875 1.755 1.904 2.223C4.978 15.71 6.427 16 8 16s3.022-.289 4.096-.777C13.125 14.755 14 14.007 14 13zm-1 4.698V10c0 .374-.356.875-1.318 1.313C10.766 11.729 9.464 12 8 12s-2.766-.27-3.682-.687C3.356 10.875 3 10.373 3 10V8.698c.271.202.58.378.904.525C4.978 9.71 6.427 10 8 10s3.022-.289 4.096-.777A5 5 0 0 0 13 8.698m0 3V13c0 .374-.356.875-1.318 1.313C10.766 14.729 9.464 15 8 15s-2.766-.27-3.682-.687C3.356 13.875 3 13.373 3 13v-1.302c.271.202.58.378.904.525C4.978 12.71 6.427 13 8 13s3.022-.289 4.096-.777c.324-.147.633-.323.904-.525" />
+										</svg>
+									</div><!--//icon-holder-->
+
+								</div><!--//col-->
+								<div class="col-auto">
+									<h4 class="app-card-title">Capacidad del equipo</h4>
+								</div><!--//col-->
+							</div><!--//row-->
+						</div><!--//app-card-header-->
+						<div class="app-card-body px-4 w-100">
+							<div class="item border-bottom py-3">
+								<div class="row justify-content-between align-items-center">
+									<div class="col-auto">
+										<div class="item-label"><strong>Huellas digitales (usado/máximo)</strong></div>
+										<div class="item-data">149/2000</div>
+									</div><!--//col-->
+								</div><!--//row-->
+							</div><!--//item-->
+
+							<div class="item border-bottom py-3">
+								<div class="row justify-content-between align-items-center">
+									<div class="col-auto">
+										<div class="item-label"><strong>Eventos de asistencia (usado/maximo)</strong>
+										</div>
+										<div class="item-data">2601/100000</div>
+									</div><!--//col-->
+									<div class="col text-end">
+										<a class="btn-sm app-btn-secondary" href="#">cambiar</a>
+									</div><!--//col-->
+								</div><!--//row-->
+							</div><!--//item-->
+						</div><!--//app-card-body-->
+					</div><!--//app-card-->
+				</div><!--//col-->
+			</div><!--//row-->
+		</div><!--//container-fluid-->
+	</div><!--//app-content-->
+</div><!--//app-wrapper-->
+<!--//Modal-password-->
+{% endblock %}
+
+{% block scripts %}
+<script>
+	document.addEventListener("DOMContentLoaded", () => {
+		fetch('/data_device')
+			.then(res => res.json())
+			.then(data => {
+				if (data.error) {
+					console.error("Error", data.error)
+				}
+				console.log("nombre:", data.name);
+				console.log("firmware:", data.firmware)
+				console.log("serie:", data.serie)
+				console.log("ip:", data.ip_biometrico)
+				console.log("port:", data.port)
+				console.log("timeout:", data.timeout)
+				console.log("password:", data.password)
+
+				document.getElementById("device-name").textContent = data.name;
+				document.getElementById("device-serie").textContent = data.serie;
+				document.getElementById("device-firmware").textContent = data.firmware;
+				document.getElementById("device-ip").textContent = data.ip_biometrico;
+				document.getElementById("device-port").textContent = data.port;
+				document.getElementById("device-timeout").textContent = data.timeout;
+				document.getElementById("device-password").textContent = data.password;
+
+			})
+			.catch(err => console.error(err));
+	});
+
+
+
+
+
+</script>
+
+{% endblock %}

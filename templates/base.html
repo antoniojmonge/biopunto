@@ -1,0 +1,60 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>{% block title %}Biopunto{% endblock %}</title>
+
+    <!-- Meta -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="antoniojmonge">
+
+    <!-- Sweet Alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- FontAwesome JS-->
+    <script defer src="{{url_for('static', filename='plugins/fontawesome/js/all.min.js')}}"></script>
+
+    <!-- APP CSS-->
+    <link rel="stylesheet" href="{{url_for('static', filename='portal.css')}}">
+</head>
+
+<body class="app">
+
+    <!--//app-header / Sidebar-->
+    {% include 'partials.html' %}
+    <!--//contenido-->
+    <main class="app-main">
+        <div class="container-fluid">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </main>
+
+    <footer class="app-footer">
+        <div class="container text-center py-3">
+            <!--/* This template is free as long as you keep the footer attribution link. If you'd like to use the template without the attribution link, you can buy the commercial license via our website: themes.3rdwavemedia.com Thank you for your support. :) */-->
+            <small class="copyright">Diseñado con <span class="sr-only">love</span><i class="fas fa-heart"
+                    style="color: #fb866a;"></i> por <a class="app-link" href="https://www.instagram.com/antoniojmonge/"
+                    target="_blank">Luis J. Monge</a> para Punto de Distribución</small>
+        </div>
+    </footer><!--//app-footer-->
+
+    <!-- Javascript-->
+    <script src="{{url_for('static', filename='popper.min.js')}}"></script>
+    <script src="{{url_for('static', filename='plugins/bootstrap/js/bootstrap.min.js')}}"></script>
+
+    <!-- Charts JS-->
+    <script src="{{url_for('static', filename='chart.js/chart.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/index-charts.js')}}"></script>
+
+    <!-- Charts JS-->
+    <script src="{{url_for('static', filename='js/app.js')}}"></script>
+
+    {% block scripts %}{% endblock %}
+
+</body>
+
+</html>

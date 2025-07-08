@@ -1,0 +1,1180 @@
+{% extends "base.html" %}
+{% block title %} Mi Empresa {%endblock%}
+{% block content %}
+
+<div class="app-wrapper">
+	<div class="app-content pt-3 p-md-3 p-lg-4">
+		<div class="container-xl">
+			<h1 class="app-page-title">Mi Empresa</h1>
+			<div class="row gy-4">
+				<div class="col-12 col-lg-6">
+					<div class="app-card app-card-account shadow-sm d-flex flex-column align-items-start">
+						<div class="app-card-header p-3 border-bottom-0">
+							<div class="row align-items-center gx-3">
+								<div class="col-auto">
+									<div class="app-icon-holder">
+										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+											fill="currentColor" class="bi bi-building" viewBox="0 0 16 16">
+											<path
+												d="M4 2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zM4 5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zM7.5 5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zM4.5 8a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5z" />
+											<path
+												d="M2 1a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1zm11 0H3v14h3v-2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5V15h3z" />
+										</svg>
+									</div><!--//icon-holder-->
+
+								</div><!--//col-->
+								<div class="col-auto">
+									<h4 class="app-card-title">Datos de la sociedad corporativa</h4>
+								</div><!--//col-->
+							</div><!--//row-->
+						</div><!--//app-card-header-->
+						<div class="app-card-body px-4 w-100">
+							<div class="item border-bottom py-3">
+								<div class="row justify-content-between align-items-center">
+									<div class="col-auto">
+										<div class="item-label mb-2"><strong>Foto</strong></div>
+										<div class="item-data"><img class="profile-image"
+												src="{{url_for('static', filename=('img/logo-empresa.png'))}}" alt="">
+										</div>
+									</div><!--//col-->
+								</div><!--//row-->
+							</div><!--//item-->
+							<div class="item border-bottom py-3">
+								<div class="row justify-content-between align-items-center">
+									<div class="col-auto">
+										<div class="item-label"><strong>Empresa</strong></div>
+										<div class="item-data" id="enterprise-company"></div>
+									</div><!--//col-->
+								</div><!--//row-->
+							</div><!--//item-->
+							<div class="item border-bottom py-3">
+								<div class="row justify-content-between align-items-center">
+									<div class="col-auto">
+										<div class="item-label"><strong>Link</strong></div>
+										<div class="item-data" id="enterprise-link">
+										</div>
+									</div><!--//col-->
+								</div><!--//row-->
+							</div><!--//item-->
+							<div class="item border-bottom py-3">
+								<div class="row justify-content-between align-items-center">
+									<div class="col-auto">
+										<div class="item-label"><strong>Documento</strong></div>
+										<div class="item-data" id="enterprise-document">
+										</div>
+									</div><!--//col-->
+
+								</div><!--//row-->
+							</div><!--//item-->
+							<div class="item border-bottom py-3">
+								<div class="row justify-content-between align-items-center">
+									<div class="col-auto">
+										<div class="item-label"><strong>Ubicación</strong></div>
+										<div class="item-data" id="enterprise-location">
+										</div>
+									</div><!--//col-->
+								</div><!--//row-->
+							</div><!--//item-->
+						</div><!--//app-card-body-->
+						<div class="app-card-footer p-4 mt-auto">
+							<a class="btn app-btn-secondary" data-bs-toggle="modal"
+								data-bs-target="#modalEnterprise">Administrar Empresa</a>
+						</div><!--//app-card-footer-->
+					</div><!--//app-card-->
+				</div><!--//col-->
+				<div class="col-12 col-lg-6">
+					<div class="app-card app-card-account shadow-sm d-flex flex-column align-items-start">
+						<div class="app-card-header p-3 border-bottom-0">
+							<div class="row align-items-center gx-3">
+								<div class="col-auto">
+									<div class="app-icon-holder">
+										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+											fill="currentColor" class="bi bi-calendar-date" viewBox="0 0 16 16">
+											<path
+												d="M6.445 11.688V6.354h-.633A13 13 0 0 0 4.5 7.16v.695c.375-.257.969-.62 1.258-.777h.012v4.61zm1.188-1.305c.047.64.594 1.406 1.703 1.406 1.258 0 2-1.066 2-2.871 0-1.934-.781-2.668-1.953-2.668-.926 0-1.797.672-1.797 1.809 0 1.16.824 1.77 1.676 1.77.746 0 1.23-.376 1.383-.79h.027c-.004 1.316-.461 2.164-1.305 2.164-.664 0-1.008-.45-1.05-.82zm2.953-2.317c0 .696-.559 1.18-1.184 1.18-.601 0-1.144-.383-1.144-1.2 0-.823.582-1.21 1.168-1.21.633 0 1.16.398 1.16 1.23" />
+											<path
+												d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" />
+										</svg>
+									</div><!--//icon-holder-->
+
+								</div><!--//col-->
+								<div class="col-auto">
+									<h4 class="app-card-title">Horario</h4>
+								</div><!--//col-->
+							</div><!--//row-->
+						</div><!--//app-card-header-->
+
+
+						<div class="app-card-body px-4 w-100">
+							<div class="item border-bottom py-3">
+								<div class="row justify-content-between align-items-center">
+								</div><!--//row-->
+							</div><!--//item-->
+							<div class="item border-bottom py-3">
+								<div class="row justify-content-between align-items-center">
+									<div class="col-auto">
+										<div class="item-label"><strong>Mañana</strong></div>
+										<div class="item-data">08:00 - 05:30</div>
+									</div><!--//col-->
+									<div class="col text-end">
+										<a class="btn-sm app-btn-secondary" href="#">cambiar</a>
+									</div><!--//col-->
+								</div><!--//row-->
+							</div><!--//item-->
+							<div class="item border-bottom py-3">
+								<div class="row justify-content-between align-items-center">
+									<div class="col-auto">
+										<div class="item-label"><strong>Tarde</strong></div>
+										<div class="item-data">05:00 - 1:00</div>
+									</div><!--//col-->
+									<div class="col text-end">
+										<a class="btn-sm app-btn-secondary" href="#">cambiar</a>
+									</div><!--//col-->
+								</div><!--//row-->
+							</div><!--//item-->
+
+						</div><!--//app-card-body-->
+						<div class="app-card-footer p-4 mt-auto">
+							<a class="btn app-btn-secondary" data-bs-toggle="modal"
+								data-bs-target="#modalHorario">Administrar Horarios</a>
+						</div><!--//app-card-footer-->
+					</div><!--//app-card-->
+				</div><!--//col-->
+				<div class="col-12 col-lg-6">
+					<div class="app-card app-card-account shadow-sm d-flex flex-column align-items-start">
+						<div class="app-card-header p-3 border-bottom-0">
+							<div class="row align-items-center gx-3">
+								<div class="col-auto">
+									<div class="app-icon-holder">
+										<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-shield-check"
+											fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+											<path fill-rule="evenodd"
+												d="M5.443 1.991a60.17 60.17 0 0 0-2.725.802.454.454 0 0 0-.315.366C1.87 7.056 3.1 9.9 4.567 11.773c.736.94 1.533 1.636 2.197 2.093.333.228.626.394.857.5.116.053.21.089.282.11A.73.73 0 0 0 8 14.5c.007-.001.038-.005.097-.023.072-.022.166-.058.282-.111.23-.106.525-.272.857-.5a10.197 10.197 0 0 0 2.197-2.093C12.9 9.9 14.13 7.056 13.597 3.159a.454.454 0 0 0-.315-.366c-.626-.2-1.682-.526-2.725-.802C9.491 1.71 8.51 1.5 8 1.5c-.51 0-1.49.21-2.557.491zm-.256-.966C6.23.749 7.337.5 8 .5c.662 0 1.77.249 2.813.525a61.09 61.09 0 0 1 2.772.815c.528.168.926.623 1.003 1.184.573 4.197-.756 7.307-2.367 9.365a11.191 11.191 0 0 1-2.418 2.3 6.942 6.942 0 0 1-1.007.586c-.27.124-.558.225-.796.225s-.526-.101-.796-.225a6.908 6.908 0 0 1-1.007-.586 11.192 11.192 0 0 1-2.417-2.3C2.167 10.331.839 7.221 1.412 3.024A1.454 1.454 0 0 1 2.415 1.84a61.11 61.11 0 0 1 2.772-.815z" />
+											<path fill-rule="evenodd"
+												d="M10.854 6.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 8.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
+										</svg>
+									</div><!--//icon-holder-->
+
+								</div><!--//col-->
+								<div class="col-auto">
+									<h4 class="app-card-title">Seguridad</h4>
+								</div><!--//col-->
+							</div><!--//row-->
+						</div><!--//app-card-header-->
+						<div class="app-card-body px-4 w-100">
+
+							<div class="item border-bottom py-3">
+								<div class="row justify-content-between align-items-center">
+									<div class="col-auto">
+										<div class="item-label"><strong>Autoriza las eliminaciones de usuarios</strong>
+										</div>
+										<div class="item-data">Usa una contraseña para eliminar usuarios del mismo
+											biométrico.</div>
+									</div><!--//col-->
+								</div><!--//row-->
+							</div><!--//item-->
+							<div class="item border-bottom py-3">
+								<div class="row justify-content-between align-items-center">
+									<div class="col-auto">
+										<div class="item-label"><strong>Contraseña</strong></div>
+										<div class="item-data" id="enterprise-password">
+										</div>
+									</div><!--//col-->
+								</div><!--//row-->
+							</div><!--//item-->
+						</div><!--//app-card-body-->
+
+						<div class="app-card-footer p-4 mt-auto">
+							<a class="btn app-btn-secondary" data-bs-toggle="modal"
+								data-bs-target="#modalPassword">Administrar seguridad</a>
+						</div><!--//app-card-footer-->
+
+					</div><!--//app-card-->
+				</div>
+
+				<!--empresas-->
+				<div class="col-12 col-lg-6">
+					<div class="app-card app-card-account shadow-sm d-flex flex-column align-items-start">
+						<div class="app-card-header p-3 border-bottom-0">
+							<div class="row align-items-center gx-3">
+								<div class="col-auto">
+									<div class="app-icon-holder">
+										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+											fill="currentColor" class="bi bi-buildings" viewBox="0 0 16 16">
+											<path
+												d="M14.763.075A.5.5 0 0 1 15 .5v15a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5V14h-1v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V10a.5.5 0 0 1 .342-.474L6 7.64V4.5a.5.5 0 0 1 .276-.447l8-4a.5.5 0 0 1 .487.022M6 8.694 1 10.36V15h5zM7 15h2v-1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5V15h2V1.309l-7 3.5z" />
+											<path
+												d="M2 11h1v1H2zm2 0h1v1H4zm-2 2h1v1H2zm2 0h1v1H4zm4-4h1v1H8zm2 0h1v1h-1zm-2 2h1v1H8zm2 0h1v1h-1zm2-2h1v1h-1zm0 2h1v1h-1zM8 7h1v1H8zm2 0h1v1h-1zm2 0h1v1h-1zM8 5h1v1H8zm2 0h1v1h-1zm2 0h1v1h-1zm0-2h1v1h-1z" />
+										</svg>
+									</div><!--//icon-holder-->
+
+								</div><!--//col-->
+								<div class="col-auto">
+									<h4 class="app-card-title">Empresas</h4>
+								</div><!--//col-->
+							</div><!--//row-->
+						</div><!--//app-card-header-->
+
+						<div class="app-card-body px-4 w-100" id="company-list">
+
+						</div><!--//app-card-body-->
+						<div class="app-card-footer p-4 mt-auto">
+							<a class="btn app-btn-secondary" data-bs-toggle="modal"
+								data-bs-target="#modalCreateCompany">Crear</a>
+						</div><!--//app-card-footer-->
+
+					</div><!--//app-card-->
+				</div>
+				<!--//empresas-->
+
+				<!--areas-->
+				<div class="col-12 col-lg-6">
+					<div class="app-card app-card-account shadow-sm d-flex flex-column align-items-start">
+						<div class="app-card-header p-3 border-bottom-0">
+							<div class="row align-items-center gx-3">
+								<div class="col-auto">
+									<div class="app-icon-holder">
+										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+											fill="currentColor" class="bi bi-people" viewBox="0 0 16 16">
+											<path
+												d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1zm-7.978-1L7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002-.014.002zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0M6.936 9.28a6 6 0 0 0-1.23-.247A7 7 0 0 0 5 9c-4 0-5 3-5 4q0 1 1 1h4.216A2.24 2.24 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816M4.92 10A5.5 5.5 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0m3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4" />
+										</svg>
+									</div><!--//icon-holder-->
+								</div><!--//col-->
+								<div class="col-auto">
+									<h4 class="app-card-title">Areas</h4>
+								</div><!--//col-->
+							</div><!--//row-->
+						</div><!--//app-card-header-->
+						<div class="app-card-body px-4 w-100" id="area-list">
+						</div><!--//app-card-body-->
+						<div class="app-card-footer p-4 mt-auto">
+							<a class="btn app-btn-secondary" data-bs-toggle="modal"
+								data-bs-target="#modalCreateArea">Crear</a>
+						</div><!--//app-card-footer-->
+					</div><!--//app-card-->
+				</div>
+				<!--//areas-->
+
+				<!--crear-planilla-->
+				<div class="col-12 col-lg-6">
+					<div class="app-card app-card-account shadow-sm d-flex flex-column align-items-start">
+						<div class="app-card-header p-3 border-bottom-0">
+							<div class="row align-items-center gx-3">
+								<div class="col-auto">
+									<div class="app-icon-holder">
+										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+											fill="currentColor" class="bi bi-file-earmark-spreadsheet"
+											viewBox="0 0 16 16">
+											<path
+												d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V9H3V2a1 1 0 0 1 1-1h5.5zM3 12v-2h2v2zm0 1h2v2H4a1 1 0 0 1-1-1zm3 2v-2h3v2zm4 0v-2h3v1a1 1 0 0 1-1 1zm3-3h-3v-2h3zm-7 0v-2h3v2z" />
+										</svg>
+									</div><!--//icon-holder-->
+								</div><!--//col-->
+								<div class="col-auto">
+									<h4 class="app-card-title">Planilla</h4>
+								</div><!--//col-->
+							</div><!--//row-->
+						</div><!--//app-card-header-->
+						<div class="app-card-body px-4 w-100" id="payment-list">
+
+
+						</div><!--//app-card-body-->
+						<div class="app-card-footer p-4 mt-auto">
+							<a class="btn app-btn-secondary" data-bs-toggle="modal"
+								data-bs-target="#modalCreatePayment">Crear</a>
+						</div><!--//app-card-footer-->
+
+					</div><!--//app-card-->
+				</div>
+				<!--//planilla-->
+			</div><!--//row-->
+		</div><!--//container-fluid-->
+	</div><!--//app-content-->
+</div><!--//app-wrapper-->
+<!--Modal-enterprise-->
+<div class="modal fade" id="modalEnterprise" tabindex="-1" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Editar mi empresa</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+			</div>
+			<div class="modal-body">
+				<form id="formEnterprise">
+					<input type="hidden" id="modal-enterprise-id">
+					<div class="mb-3">
+						<label class="form-label">Nombre</label>
+						<input type="text" class="form-control" id="modal-enterprise">
+					</div>
+					<div class="mb-3">
+						<label class="form-label">Link</label>
+						<input type="text" class="form-control" id="modal-link">
+					</div>
+					<div class="mb-3">
+						<label class="form-label">Documento</label>
+						<input type="text" class="form-control" id="modal-documento">
+					</div>
+					<div class="mb-3">
+						<label class="form-label">Ubicacion</label>
+						<input type="text" class="form-control" id="modal-ubigeo">
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+				<button type="button" id="btnGuardarEmpresa" class="btn btn-success">Guardar</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--//Modal-enterprise-->
+<!--Modal-password-->
+<div class="modal fade" id="modalPassword" tabindex="-1" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Editar la contraseña</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+			</div>
+			<div class="modal-body">
+				<form id="formPassword">
+					<input type="hidden" id="modal-password-id">
+					<div class="mb-3">
+						<label class="form-label">Contraseña</label>
+						<input type="text" class="form-control" id="modal-password">
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+				<button type="button" id="btnSavePassword" class="btn btn-success">Guardar</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--//Modal-password-->
+
+<!-- Modal-Crear-Empresa -->
+<div class="modal fade" id="modalCreateCompany" tabindex="-1" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Crear Empresa</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+			</div>
+			<div class="modal-body">
+				<form id="formCreateCompany">
+					<input type="hidden" id="create-company-id">
+
+					<div class="mb-3">
+						<label class="form-label">Nombre</label>
+						<input type="text" class="form-control" id="create-company-name">
+					</div>
+
+					<div class="mb-3">
+						<label class="form-label">Documento</label>
+						<input type="text" class="form-control" id="create-company-document">
+					</div>
+
+					<div class="mb-3">
+						<label class="form-label">Ubicación</label>
+						<input type="text" class="form-control" id="create-company-location">
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+				<button type="button" id="btnCreateCompany" class="btn btn-success">Guardar</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- //Modal-Crear-Empresa -->
+
+<!-- Modal Editar Empresa -->
+<div class="modal fade" id="modalEditCompany" tabindex="-1" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Editar Empresa</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+			</div>
+			<div class="modal-body">
+				<form id="formEditCompany">
+					<input type="hidden" id="edit-company-id">
+
+					<div class="mb-3">
+						<label class="form-label">Nombre</label>
+						<input type="text" class="form-control" id="edit-company-name">
+					</div>
+
+					<div class="mb-3">
+						<label class="form-label">Documento</label>
+						<input type="text" class="form-control" id="edit-company-document">
+					</div>
+
+					<div class="mb-3">
+						<label class="form-label">Ubicación</label>
+						<input type="text" class="form-control" id="edit-company-location">
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+				<button type="button" id="btnSaveCompany" class="btn btn-success">Guardar</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--//Modal editar empresas-->
+
+<!-- Modal-Crear-Area -->
+<div class="modal fade" id="modalCreateArea" tabindex="-1" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Crear Area</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+			</div>
+			<div class="modal-body">
+				<form id="formCreateArea">
+					<input type="hidden" id="create-area-id">
+
+					<div class="mb-3">
+						<label class="form-label">Nombre</label>
+						<input type="text" class="form-control" id="create-area-name">
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+				<button type="button" id="btnCreateArea" class="btn btn-success">Guardar</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- //Modal-Crear-area -->
+
+<!-- Modal Editar area -->
+<div class="modal fade" id="modalEditArea" tabindex="-1" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Editar Empresa</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+			</div>
+			<div class="modal-body">
+				<form id="formEditArea">
+					<input type="hidden" id="edit-area-id">
+
+					<div class="mb-3">
+						<label class="form-label">Nombre</label>
+						<input type="text" class="form-control" id="edit-area-name">
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+				<button type="button" id="btnSaveArea" class="btn btn-success">Guardar</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--//Modal editar area-->
+
+<!-- Modal-Crear-Planilla -->
+<div class="modal fade" id="modalCreatePayment" tabindex="-1" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Crear Planilla</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+			</div>
+			<div class="modal-body">
+				<form id="formCreatePayment">
+					<input type="hidden" id="create-payment-id">
+
+					<div class="mb-3">
+						<label class="form-label">Alias del sueldo</label>
+						<input type="text" class="form-control" id="create-payment-description">
+					</div>
+
+					<div class="mb-3">
+						<label class="form-label">Digita la cantida de remuneración</label>
+						<input type="number" class="form-control" id="create-payment-salary">
+					</div>
+
+					<div class="mb-3">
+						<label class="form-label">Digita el porcentaje de descuento actual</label>
+						<input type="number" class="form-control" id="create-payment-discount_afp">
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+				<button type="button" id="btnCreatePayment" class="btn btn-success">Guardar</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- //Modal-Crear-planilla -->
+
+<!-- Modal-Editar-planilla -->
+<div class="modal fade" id="modalEditPayment" tabindex="-1" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Editar Planilla</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+			</div>
+			<div class="modal-body">
+				<form id="formEditPayment">
+					<input type="hidden" id="edit-payment-id">
+
+					<div class="mb-3">
+						<label class="form-label">Descripcion</label>
+						<input type="text" class="form-control" id="edit-payment-description">
+					</div>
+
+					<div class="mb-3">
+						<label class="form-label">Sueldo</label>
+						<input type="text" class="form-control" id="edit-payment-salary">
+					</div>
+
+					<div class="mb-3">
+						<label class="form-label">Descuento afp</label>
+						<input type="text" class="form-control" id="edit-payment-discount_afp">
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+				<button type="button" id="btnSavePayment" class="btn btn-success">Guardar</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- //Modal-Editar-planilla -->
+
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+	document.addEventListener("DOMContentLoaded", () => {
+		//Fetch para mostrar la información de la empresa principal
+		fetch('/show_data')
+			.then(res => res.json())
+			.then(data => {
+				if (data.error) {
+					console.error("Error", data.error)
+					return;
+				}
+
+				//solo existe una unica empresa donde el biométrico está situado
+				const enterprise = data.data_enterprise[0];
+
+				if (!enterprise) {
+					console.warn("No hay datos de la empresa");
+					return;
+				}
+				//Reemplazar datos dinamicamente			
+				document.getElementById('enterprise-company').textContent = enterprise.name_enterprise;
+				document.getElementById('enterprise-link').textContent = enterprise.link;
+				document.getElementById('enterprise-link').href = enterprise.link;
+				document.getElementById('enterprise-document').textContent = enterprise.document;
+				document.getElementById('enterprise-location').textContent = enterprise.ubigeo;
+				document.getElementById('enterprise-password').textContent = enterprise.security_pass;
+
+				//guardar dato en variable global
+				window.enterpriseData = enterprise;
+			})
+			.catch(err => {
+				console.error("Error al cargar datos: ", err)
+			});
+
+
+		//Delegacion para boton administrar empresa(modal)
+		const modal = document.getElementById('modalEnterprise');
+		modal.addEventListener('show.bs.modal', event => {
+			const enterprise = window.enterpriseData;
+			if (!enterprise) {
+				console.error("No hay datos para llenar el modal");
+				return;
+			}
+			document.getElementById('modal-enterprise-id').value = enterprise.id;
+			document.getElementById('modal-enterprise').value = enterprise.name_enterprise;
+			document.getElementById('modal-link').value = enterprise.link;
+			document.getElementById('modal-documento').value = enterprise.document;
+			document.getElementById('modal-ubigeo').value = enterprise.ubigeo;
+		});
+
+		//Delegacion para boton administrar contraseña(modal)
+		const modal_password = document.getElementById('modalPassword');
+		modal_password.addEventListener('show.bs.modal', event => {
+			const enterprise = window.enterpriseData;
+			if (!enterprise) {
+				console.error("No hay datos para llenar en el modal");
+				return;
+			}
+			document.getElementById('modal-password-id').value = enterprise.id;
+			document.getElementById('modal-password').value = enterprise.security_pass;
+		});
+
+		//Guardar cambios desde el modal de administrar empresa
+		document.getElementById('btnGuardarEmpresa').addEventListener('click', () => {
+			const payload = {
+				id: document.getElementById('modal-enterprise-id').value,
+				name_enterprise: document.getElementById('modal-enterprise').value,
+				link: document.getElementById('modal-link').value,
+				document: document.getElementById('modal-documento').value,
+				ubigeo: document.getElementById('modal-ubigeo').value,
+			};
+			console.log("Datos a enviar desde el modal: ", payload);
+			fetch('/update_enterprise', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(payload)
+			})
+				.then(res => res.json())
+				.then(data => {
+					if (data.error) {
+						alert("Error: " + data.error);
+						return;
+					}
+					alert("Datos atualizados correctamente.");
+					location.reload(); //recarga para ver los nuevos datos
+				})
+				.catch(err => {
+					console.error("Error al actualizar: ", err);
+				});
+		});
+
+		//Guardar cambios desde el modal de administrar contraseña
+		document.getElementById('btnSavePassword').addEventListener('click', () => {
+			const payload = {
+				id: document.getElementById('modal-password-id').value,
+				security_pass: document.getElementById('modal-password').value
+			};
+			console.log("Clave a enviar desde el modal", payload);
+			fetch('/update_password', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(payload)
+			})
+				.then(res => res.json())
+				.then(data => {
+					if (data.error) {
+						alert("Error" + data.error)
+						return;
+					}
+					alert("Contraseña actualizadad correctamente.");
+					location.reload();
+				})
+				.catch(err => {
+					console.error("Error al actualizar la clave: ", err)
+				});
+		});
+
+		//------------------------------------SUB MODULO DE EMPRESA------------------------------------
+		//Crear empresa:
+		document.getElementById("btnCreateCompany").addEventListener("click", () => {
+			//capturamos datos del formulario
+			const payload = {
+				name_company: document.getElementById("create-company-name").value.trim(),
+				document_company: document.getElementById("create-company-document").value.trim(),
+				location: document.getElementById("create-company-location").value.trim(),
+			};
+
+			//validar de qu no sean campos vacíos
+			if (!payload.name_company || !payload.document_company || !payload.location) {
+				alert("Todos los campos deben ser obligatorios");
+				return;
+			}
+
+			console.log("Datos a enviar", payload)
+
+			//Hacer el post al endpoint
+			fetch('/create_company', {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(payload)
+			})
+				.then(res => res.json())
+				.then(data => {
+					if (data.error) {
+						alert("Error:" + data.error);
+						return;
+					}
+					alert(data.mensaje || "Empresa creada correctamente")
+
+					//cerrar el modal y recargar
+					const modalEl = document.getElementById("modalCreateCompany");
+					const modalInstance = bootstrap.Modal.getInstance(modalEl);
+					if (modalInstance) {
+						modalInstance.hide();
+					}
+					location.reload();
+				})
+				.catch(err => {
+					console.error("Error al crear empresa:", err);
+					alert("Error al crear empresa");
+				});
+		});
+
+
+		// Mostrar la información de las empresas
+		fetch("/show_company", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" }
+		})
+			.then(res => res.json())
+			.then(data => {
+				if (data.error) {
+					console.error("Error: ", data.error);
+					return;
+				}
+				const companies = data.data_company;
+				const container = document.getElementById("company-list");
+
+				if (!companies || companies.length === 0) {
+					container.innerHTML = "<p>No hay empresas registradas.</p>";
+					return;
+				}
+
+				companies.forEach(company => {
+					const item = document.createElement("div");
+					item.className = "item border-bottom py-3";
+					item.innerHTML = `
+          <div class="row justify-content-between align-items-center">
+            <div class="col-auto">
+              <div class="item-label">
+                <strong>${company.name_company}</strong>
+              </div>
+              <div class="item-data">${company.document_company} — ${company.location}</div>
+            </div>
+            <div class="col text-end">
+                    <a class="btn-sm app-btn-secondary btn-edit-company" href="#" 
+         data-id="${company.id}"
+         data-name="${company.name_company}"
+         data-document="${company.document_company}"
+         data-location="${company.location}">Editar</a>
+		<a class="btn-sm btn-danger btn-delete-company ms-2" href="#" 
+           data-id="${company.id}">Eliminar</a>
+            </div>
+          </div>
+        `;
+					container.appendChild(item);
+				});
+
+			})
+			.catch(err => console.error("Error al cargar empresas: ", err));
+
+		//Delegar clic en todos los botones de editar empresa
+		document.addEventListener("click", function (e) {
+			if (e.target && e.target.classList.contains("btn-edit-company")) {
+				e.preventDefault();
+				const id = e.target.dataset.id;
+				const name = e.target.dataset.name;
+				const documentCompany = e.target.dataset.document;
+				const location = e.target.dataset.location;
+
+				//rellenar el modal
+				document.getElementById("edit-company-id").value = id;
+				document.getElementById("edit-company-name").value = name;
+				document.getElementById("edit-company-document").value = documentCompany;
+				document.getElementById("edit-company-location").value = location;
+
+				//mostrar el modal
+				const myModal = new bootstrap.Modal(document.getElementById("modalEditCompany"));
+				myModal.show();
+			}
+		});
+
+		//fetch de modificación de empresa
+		document.getElementById("btnSaveCompany").addEventListener("click", () => {
+			const payload = {
+				id: document.getElementById("edit-company-id").value,
+				name_company: document.getElementById("edit-company-name").value,
+				document_company: document.getElementById("edit-company-document").value,
+				location: document.getElementById("edit-company-location").value,
+			};
+
+			console.log("Datos a enviar al endpoint", payload);
+
+			fetch("/update_company", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(payload),
+			})
+				.then(res => res.json())
+				.then(data => {
+					if (data.error) {
+						alert("Error: " + data.error); // ✅ typo corregido
+						return;
+					}
+					alert("Empresa enviada correctamente");
+					location.reload();
+				})
+				.catch(err => console.error("Error al actualizar la empresa: ", err));
+		});
+
+		//Fetch de eliminacion de compañía
+		document.addEventListener("click", function (e) {
+			if (e.target && e.target.classList.contains("btn-delete-company")) {
+				e.preventDefault();
+				const id = e.target.dataset.id;
+
+				if (!confirm("Estas seguro de eliminar la empresa?")) {
+					return;
+				}
+				fetch('/delete_company', {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({ id })
+				})
+					.then(res => res.json())
+					.then(data => {
+						if (data.error) {
+							alert("Error:" + data.error);
+							return;
+						}
+						alert(data.mensaje || "Empresa eliminada conn exito");
+						location.reload();
+					})
+					.catch(err => {
+						console.error("Error al eliminar la empresa", err)
+						alert("Error al eliminar la empresa")
+					});
+			}
+		});
+
+		//-------------------------SUB MODULO DE AREA-----------------------//
+
+		//Fetch para crear las áreas disponibles
+		document.getElementById("btnCreateArea").addEventListener("click", () => {
+			const payload = {
+				area: document.getElementById("create-area-name").value.trim()
+			};
+			//validar que no sea campo vacío
+			if (!payload.area) {
+				alert("Rellena el campo con un área");
+				return;
+			}
+
+			console.log("Datos a enviar: ", payload);
+
+			//Enviar datos al endpoint
+			fetch('/create_area', {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(payload)
+			})
+				.then(res => res.json())
+				.then(data => {
+					if (data.error) {
+						alert("Error:" + data.error);
+						return;
+					}
+					alert("Area creada correctamente")
+					//Cerrar el modal y recargar
+					const modalEl = document.getElementById("modalCreateArea");
+					const modalInstance = bootstrap.Modal.getInstance(modalEl);
+					if (modalInstance) modalInstance.hide();
+					location.reload();
+				})
+				.catch(err => {
+					console.error("Error al crear la area:", err)
+					alert("Error al crear area");
+				});
+		});
+
+		//Fetch para editar las areas
+		document.addEventListener("click", function (e) {
+			if (e.target && e.target.classList.contains("btn-edit-area")) {
+				e.preventDefault();
+				const id = e.target.dataset.id;
+				const name = e.target.dataset.name;
+
+				//rellenar el modal
+				document.getElementById("edit-area-id").value = id;
+				document.getElementById("edit-area-name").value = name;
+
+				//mostrar el modal
+				const myModal = new bootstrap.Modal(document.getElementById("modalEditArea"));
+				myModal.show();
+			}
+		});
+
+		//Fecth para guardar las áreas desde el modal
+		document.getElementById("btnSaveArea").addEventListener("click", () => {
+			const payload = {
+				id: document.getElementById("edit-area-id").value,
+				area: document.getElementById("edit-area-name").value,
+			};
+
+			console.log("Datos del area para enviar: ", payload);
+
+			fetch('/update_area', {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(payload),
+			})
+				.then(res => res.json())
+				.then(data => {
+					if (data.error) {
+						alert("Error: " + data.error);
+						return;
+					}
+					alert("Empresa enviada al be correctamente");
+					location.reload();
+				})
+				.catch(err => console.error("Error al actualizar la empresa: ", err))
+		});
+
+		//fecth para eliminar las areas
+		document.addEventListener("click", function (e) {
+			if (e.target && e.target.classList.contains("btn-delete-area")) {
+				e.preventDefault();
+				const id = e.target.dataset.id;
+
+				if (!confirm("Estas seguro que deseas eliminar el área")) {
+					return;
+				}
+				fetch('/delete_area', {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({ id })
+				})
+					.then(res => res.json())
+					.then(data => {
+						if (data.error) {
+							alert("Error: " + data.error);
+							return;
+						}
+						alert(data.mensaje || "Area eliminada correctamente");
+						location.reload();
+					})
+					.catch(err => {
+						console.error("Error al eliminar la empresa", err)
+						alert("Error al eliminar la empresa");
+					});
+			}
+		});
+
+
+		//Fetch para mostrar las áreas disponibles
+		fetch('/show_area', {
+			method: "POST",
+			headers: { "Content-Type": "application/json" }
+		})
+			.then(res => res.json())
+			.then(data => {
+				if (data.error) {
+					alert("error:" + data.error);
+					return;
+				}
+				const areas = data.data_area;
+				const container = document.getElementById("area-list");
+
+				if (!areas || areas.length === 0) {
+					container.innerHTML = "<p>No hay empresas registradas.</p>";
+					return;
+				}
+				areas.forEach(area => {
+					const item = document.createElement("div");
+					item.className = "item border-bottom py-3";
+					item.innerHTML = `
+					<div class="row justify-content-between align-items-center">
+						
+						<div class="col-auto">
+							<div class="item-label">
+								${area.area}
+							</div>													
+						</div>
+						<div class="col text-end">
+						<a class="btn-sm app-btn-secondary btn-edit-area" href="#"
+						data-id="${area.id}"
+						data-name="${area.area}">Editar</a>
+						<a class="btn-sm btn-danger btn-delete-area ms-2" href="#" 
+						data-id="${area.id}">Eliminar</a>
+						</div>
+						</div>
+					`;
+					container.appendChild(item);
+				});
+			})
+			.catch(err => console.error("Error al cargar las areas:", err));
+
+
+		//fetch para mostrar la planilla actual
+		fetch("/show_payment", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" }
+		})
+			.then(res => res.json())
+			.then(data => {
+				if (data.error) {
+					console.error("error:", data.error);
+					return;
+				}
+				const payments = data.data_payment;
+				const container = document.getElementById("payment-list");
+
+				if (!payments || payments.length === 0) {
+					container.innerHTML = "<p>No hay planillas registradas.</p>";
+					return;
+				}
+
+				payments.forEach(payment => {
+					const item = document.createElement("div");
+					item.className = "item border-bottom py-3";
+					item.innerHTML = `
+					<div class="row justify-content-between align-items-center">
+						<div class="col-auto">
+							<div class="item-label">
+								<strong>${payment.description}</strong>
+							</div>
+							<div class="item-data">S/. ${payment.salary} — ${payment.discount_afp}</div>
+						</div>
+						<div class="col text-end">
+							<a class="btn-sm app-btn-secondary btn-edit-payment" href="#" 
+								data-id="${payment.id}"
+								data-description="${payment.description}"
+								data-salary="${payment.salary}"
+								data-discount_afp="${payment.discount_afp}"								
+								>Editar
+							</a>
+							<a class="btn-sm btn-danger btn-delete-payment ms-2" href="#" data-id="${payment.id}">Eliminar</a> 
+							</div>
+						</div>
+					`;
+					container.appendChild(item);
+				});
+			})
+			.catch(err => console.error("error al cargar la planilla: ", err))
+
+		//---Crear planilla---
+		document.getElementById("btnCreatePayment").addEventListener("click", () => {
+			const payload = {
+				description: document.getElementById("create-payment-description").value.trim(),
+				salary: document.getElementById("create-payment-salary").value.trim(),
+				discount_afp: document.getElementById("create-payment-discount_afp").value.trim().replace(",", "."),
+			};
+			//que no seam campos vacíos
+			if (!payload.description || !payload.salary || !payload.discount_afp) {
+				alert("Campos obligatorios");
+				return;
+			}
+
+			console.log("Datos a enviar", payload)
+
+			//post al BE
+			fetch('/create_payment', {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(payload)
+			})
+				.then(res => res.json())
+				.then(data => {
+					if (data.error) {
+						alert("error: " + data.error);
+						return;
+					}
+					alert(data.mensaje || "Planilla creada correctamente")
+					//cerrar modal y recargar
+					const modalEl = document.getElementById("modalCreatePayment");
+					const modalInstance = bootstrap.Modal.getInstance(modalEl);
+					if (modalInstance) {
+						modalInstance.hide();
+					}
+					location.reload();
+				})
+				.catch(err => {
+					console.error("error al crear la planilla", err);
+					alert("error al crear planilla");
+				});
+		});
+
+		//--darle funcionalidad al boton de editar de la lista de planillas
+		document.addEventListener("click", function (e) {
+			if (e.target && e.target.classList.contains("btn-edit-payment")) {
+				e.preventDefault();
+				const id = e.target.dataset.id;
+				const description = e.target.dataset.description;
+				const salary = e.target.dataset.salary;
+				const discount_afp = e.target.dataset.discount_afp;
+				//rellenar el modal
+				document.getElementById("edit-payment-id").value = id;
+				document.getElementById("edit-payment-description").value = description;
+				document.getElementById("edit-payment-salary").value = salary;
+				document.getElementById("edit-payment-discount_afp").value = discount_afp;
+				//mostrar el modal
+				const modalEl = document.getElementById("modalEditPayment");
+				const myModal = new bootstrap.Modal(modalEl);
+				myModal.show();
+			}
+		})
+
+		//--guardar la planilla desde el boton del modal---
+		document.getElementById("btnSavePayment").addEventListener("click", () => {
+			const payload = {
+				id: document.getElementById("edit-payment-id").value,
+				description: document.getElementById("edit-payment-description").value,
+				salary: parseFloat(document.getElementById("edit-payment-salary").value),
+				discount_afp: parseFloat(document.getElementById("edit-payment-discount_afp").value),
+			};
+			console.log("Datos para el EP", payload);
+
+			fetch('/update_payment', {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(payload),
+			})
+				.then(res => res.json())
+				.then(data => {
+					if (data.error) {
+						alert("error:" + data.error);
+						return;
+					}
+					alert("Planilla actualizada");
+					location.reload();
+				})
+				.catch(err => console.error("Error al actualizar la planilla", err))
+		});
+
+		//eliminar planilla
+		document.addEventListener("click", function (e) {
+			if (e.target && e.target.classList.contains("btn-delete-payment")) {
+				e.preventDefault();
+				const id = e.target.dataset.id;
+				if (!confirm("Seguro de elimnarlo?")) {
+					return;
+				}
+				fetch('/delete_payment', {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({ id })
+				})
+					.then(res => res.json())
+					.then(data => {
+						if (data.error) {
+							alert("error:" + data.error);
+							return;
+						}
+						alert(data.mensaje || "planilla eliminada");
+						location.reload();
+					})
+					.catch(err => {
+						console.error("error al eliminar planilla", err);
+						alert("error al elimnar la planilla");
+					});
+				}
+			});		
+
+		});
+
+</script>
+
+{% endblock %}
